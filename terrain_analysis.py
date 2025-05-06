@@ -1,4 +1,16 @@
 import argparse
+import rasterio
+import scipy
+import rasterio.mask
+import numpy as np
+import geopandas as gpd
+import pandas as pd
+
+import matplotlib.pyplot as plt  # For visualization
+import os  # For file system interaction
+import fiona  # For lower-level vector data handling
+import shapely  # For geometric operations
+import pyproj # For coordinate transformations
 
 def convert_to_rasterio(raster_data, template_raster):
   
