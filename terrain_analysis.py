@@ -10,6 +10,7 @@ import os  # For file system interaction
 import fiona  # For lower-level vector data handling
 import shapely  # For geometric operations
 import pyproj # For coordinate transformations
+import  scikit-learn
 
 def convert_to_rasterio(raster_data, template_raster):
   
