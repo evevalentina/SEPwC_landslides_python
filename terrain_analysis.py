@@ -13,9 +13,13 @@ import pyproj # For coordinate transformations
 import  scikit-learn
 from sklearn.ensemble import RandomForestClassifier
 
+
 def convert_to_rasterio(raster_data, template_raster):
-  
-    return
+  print("If message appears - convert_to_rasterio is sucsessful")
+  template_raster =(AW3D30.tif, Geology.tif, Lancover.tif)
+  with rasterio.open(AW3D30.tif, Geology.tif, Lancover.tif):
+       dataset = template_raster
+     return dataset
 
 
 def extract_values_from_raster(raster, shape_object):
