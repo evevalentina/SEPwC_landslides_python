@@ -15,10 +15,9 @@ from sklearn.ensemble import RandomForestClassifier
 
 def convert_to_rasterio(raster_data, template_raster):
   print("If message appears - convert_to_rasterio is sucsessful")
-  template_raster =(AW3D30.tif, Geology.tif, Lancover.tif)
-  with rasterio.open(AW3D30.tif, Geology.tif, Lancover.tif):
+  with rasterio.open(raster_data, template_raster):
        dataset = template_raster
-     return dataset
+  return dataset.meta
 
 
 def extract_values_from_raster(raster, shape_object):
