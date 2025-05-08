@@ -15,7 +15,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 def convert_to_rasterio(raster_data, template_raster):
   print("If message appears - convert_to_rasterio is sucsessful")
-  with rasterio.open(raster_data, template_raster):
+  with rasterio.open(template_raster):
        dataset = template_raster
   return dataset.meta
 
