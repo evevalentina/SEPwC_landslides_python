@@ -14,8 +14,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 
 def convert_to_rasterio(raster_data, template_raster):
-  print("If message appears - convert_to_rasterio is sucsessful")
-  def convert_to_rasterio(raster_data, template_raster):
+#  print("If message appears - convert_to_rasterio is sucsessful")
     profile = template_raster.profile.copy()
     profile.update(
         dtype=raster_data.dtype,
