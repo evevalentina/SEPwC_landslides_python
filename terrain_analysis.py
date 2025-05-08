@@ -26,9 +26,9 @@ def convert_to_rasterio(raster_data, template_raster):
     dst = rasterio.open("temp_raster.tif", 'w', **profile)
     dst.write(raster_data, 1)
     return dst
-  #with rasterio.open(template_raster):
-       dataset = template_raster
-  #return dataset.meta
+#with rasterio.open(template_raster):
+#dataset = template_raster
+#return dataset.meta
 
 
 def extract_values_from_raster(raster, shape_object):
