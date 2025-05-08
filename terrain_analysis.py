@@ -22,6 +22,7 @@ def convert_to_rasterio(raster_data, template_raster):
         width=raster_data.shape[1],
         count=1,
         compress='lzw'
+        )
   with rasterio.open(template_raster):
        dataset = template_raster
   return dataset.meta
