@@ -11,6 +11,7 @@ import fiona  # For lower-level vector data handling
 import shapely  # For geometric operations
 import pyproj # For coordinate transformations
 import  scikit-learn
+from sklearn.ensemble import RandomForestClassifier
 
 def convert_to_rasterio(raster_data, template_raster):
   
