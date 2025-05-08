@@ -14,9 +14,20 @@ from sklearn.ensemble import RandomForestClassifier
 
 
 def convert_to_rasterio(raster_data, template_raster):
-    print("If message is shown the convert to rasterio is sucsessful")
-    with rasterio.open(template_raster):
-        return dataset.meta
+profile = template_raster.profile.copy()
+    profile.update(
+        dtype=raster_data.dtype,
+        height=raster_data.shape[0],
+        width=raster_data.shape[1],
+        count=1,
+        compress='lzw'
+    )
+    # Create a temporary file
+    with rasterio.open("temp_raster.tif", 'w', **profile) as dst:
+        dst.write(raster_data, 1)
+
+    # Open the temporary file for reading, as the test expects a DatasetReader
+    return rasterio.open("temp_raster.tif")
 
 
 def extract_values_from_raster(raster, shape_object):
