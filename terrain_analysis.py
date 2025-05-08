@@ -15,17 +15,21 @@ from sklearn.ensemble import RandomForestClassifier
 
 def convert_to_rasterio(raster_data, template_raster):
   print("If message appears - convert_to_rasterio is sucsessful")
-  profile = template_raster.profile.copy()
-  profile.update(
+  def convert_to_rasterio(raster_data, template_raster):
+    profile = template_raster.profile.copy()
+    profile.update(
         dtype=raster_data.dtype,
         height=raster_data.shape[0],
         width=raster_data.shape[1],
         count=1,
         compress='lzw'
-   )
-  with rasterio.open(template_raster):
+    )
+    dst = rasterio.open("temp_raster.tif", 'w', **profile)
+    dst.write(raster_data, 1)
+    return dst
+  #with rasterio.open(template_raster):
        dataset = template_raster
-  return dataset.meta
+  #return dataset.meta
 
 
 def extract_values_from_raster(raster, shape_object):
