@@ -5,7 +5,6 @@ import rasterio.mask
 import numpy as np
 import geopandas as gpd
 import pandas as pd
-
 import matplotlib.pyplot as plt  # For visualization
 import os  # For file system interaction
 import fiona  # For lower-level vector data handling
