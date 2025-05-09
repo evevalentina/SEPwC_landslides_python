@@ -1,5 +1,5 @@
 """
-This module implements landslide risk analysis using machine learning.
+This module implements landslide risk analysis using rasterio and machine learning.
 It takes various geographic data inputs and produces a probability map of landslide occurrence.
 """
 
