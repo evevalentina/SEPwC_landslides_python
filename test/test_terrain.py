@@ -105,7 +105,7 @@ class TestRegression():
         import os
         import rasterio
 
-        result = run(["python3","terrain_analysis.py",
+        result = run(["python","terrain_analysis.py",
                                 "--topography",
                                 "data/AW3D30.tif",
                                 "--geology",
@@ -131,7 +131,7 @@ class TestRegression():
         import os
         import rasterio
 
-        result = run(["python3","terrain_analysis.py",
+        result = run(["python","terrain_analysis.py",
                                 "--topography",
                                 "data/AW3D30.tif",
                                 "--geology",
