@@ -1,6 +1,6 @@
 """
 IMPORTANT- please can this exam be ran in a MAC OR LINEUX opperating system as the processing is at times inconsistant in windows
-This module implements landslide risk analysis using rasterio and machine learning.
+This module implements landslide risk analysis using rasterio.
 It takes various geographic data inputs and produces a probability map of landslide occurrence.
 """
 
