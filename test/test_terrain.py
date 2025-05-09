@@ -99,7 +99,7 @@ class TestTerrainAnalysis():
 
 class TestRegression():
 
-    def test_regression(self):
+    '''def test_regression(self):
 
         from subprocess import run
         import os
@@ -122,9 +122,53 @@ class TestRegression():
         values = raster.read(1)
         assert values.max() <= 1
         assert values.min() >= 0
-        os.remove("test.tif")
+        os.remove("test.tif")'''
         
-
+    def test_regression(self):
+        from subprocess import run, CalledProcessError
+        import os
+        import rasterio
+    
+        print("Starting regression test...")
+    
+        try:
+            result = run([
+                "python",  # use "python" instead of "python3" for cross-platform
+                "terrain_analysis.py",
+                "--topography", "data/AW3D30.tif",
+                "--geology", "data/Geology.tif",
+                "--landcover", "data/Landcover.tif",
+                "--faults", "data/Confirmed_faults.shp",
+                "data/landslides.shp",
+                "test.tif"
+            ], capture_output=True, text=True, check=True)
+    
+            print("Subprocess finished.")
+            print("STDOUT:\n", result.stdout)
+            print("STDERR:\n", result.stderr)
+    
+        except CalledProcessError as e:
+            print("Subprocess failed with error:")
+            print("Return code:", e.returncode)
+            print("STDOUT:\n", e.stdout)
+            print("STDERR:\n", e.stderr)
+            raise  # re-raise to fail the test
+    
+        assert len(result.stdout) < 25, "Too much output from terrain_analysis.py"
+    
+        print("Opening output raster: test.tif")
+        raster = rasterio.open("test.tif")
+        values = raster.read(1)
+        print("Max value:", values.max())
+        print("Min value:", values.min())
+    
+        assert values.max() <= 1, "Max value exceeds 1"
+        assert values.min() >= 0, "Min value below 0"
+    
+        print("Cleaning up test.tif...")
+        os.remove("test.tif")
+        print("Test completed successfully.")
+    
     def test_regression_verbose(self):
 
         from subprocess import run
