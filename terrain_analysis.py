@@ -1,7 +1,9 @@
 """
-IMPORTANT- please can this exam be ran in a MAC OR LINEUX opperating system as the processing is at times inconsistant in windows
+IMPORTANT- please can this exam be ran in a MAC OR LINEUX opperating system as
+the processing is at times inconsistant in windows
 This module implements landslide risk analysis using rasterio.
-It takes various geographic data inputs and produces a probability map of landslide occurrence.
+It takes various geographic data inputs and produces a probability map
+of landslide occurrence.
 """
 
 from dataclasses import dataclass
@@ -223,7 +225,7 @@ def calculate_fault_distance(topo: rasterio.DatasetReader,
     return fault_dist, convert_to_rasterio(fault_dist, topo)
 
 def generate_non_landslide_points(topo: rasterio.DatasetReader,
-                                num_points: int) -> List[shapely.geometry.Point]:
+                            num_points: int) -> List[shapely.geometry.Point]:
     """Generate random non-landslide points."""
     np.random.seed(42)
     points = []
@@ -302,7 +304,8 @@ def main():
     landslides = gpd.read_file(args.landslides)
     if args.verbose:
         print("Calculating slope...")
-        #temporerily changing calculate_slope to calculate_slope_vectorized to see if it has a positive change/not
+        '''temporerily changing calculate_slope to calculate_slope_vectorized
+        to see if it has a positive change/not'''
     _, slope_raster = calculate_slope(topo)
     if args.verbose:
         print("Calculating distance from faults...")
