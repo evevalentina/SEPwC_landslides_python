@@ -4,7 +4,7 @@ This module implements landslide risk analysis using rasterio.
 It takes various geographic data inputs and produces a probability map of landslide occurrence.
 """
 
-from dataclasses import dataclass 
+from dataclasses import dataclass
 from typing import List, Tuple
 import argparse
 
