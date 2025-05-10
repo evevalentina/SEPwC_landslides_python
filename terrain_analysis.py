@@ -225,7 +225,7 @@ def calculate_fault_distance(topo: rasterio.DatasetReader,
     return fault_dist, convert_to_rasterio(fault_dist, topo)
 
 def generate_non_landslide_points(topo: rasterio.DatasetReader,
-                            num_points: int) -> List[shapely.geometry.Point]:
+                                num_points: int) -> List[shapely.geometry.Point]:
     """Generate random non-landslide points."""
     np.random.seed(42)
     points = []
