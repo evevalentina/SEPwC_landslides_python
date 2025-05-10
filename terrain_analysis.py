@@ -174,7 +174,7 @@ def create_dataframe(topo, geo=None, lc=None, dist_fault=None,
     gdf = gpd.GeoDataFrame(df)
     return gdf
 
-'''def calculate_slope(topo: rasterio.DatasetReader) -> Tuple[np.ndarray, rasterio.DatasetReader]:
+def calculate_slope(topo: rasterio.DatasetReader) -> Tuple[np.ndarray, rasterio.DatasetReader]:
     """Calculate slope from topography."""
     elevation = topo.read(1)
     slope = np.zeros_like(elevation)
@@ -183,9 +183,9 @@ def create_dataframe(topo, geo=None, lc=None, dist_fault=None,
             dz_dx = (elevation[i, j+1] - elevation[i, j-1]) / (2 * topo.res[0])
             dz_dy = (elevation[i+1, j] - elevation[i-1, j]) / (2 * topo.res[1])
             slope[i, j] = np.arctan(np.sqrt(dz_dx**2 + dz_dy**2)) * 180 / np.pi
-    return slope, convert_to_rasterio(slope, topo)'''
+    return slope, convert_to_rasterio(slope, topo)
 
-def calculate_slope_vectorized(topo: rasterio.DatasetReader) -> Tuple[np.ndarray, rasterio.DatasetReader]:
+'''def calculate_slope_vectorized(topo: rasterio.DatasetReader) -> Tuple[np.ndarray, rasterio.DatasetReader]:
     """Calculate slope from topography using vectorized operations."""
     elevation = topo.read(1)
     resolution_x, resolution_y = topo.res
@@ -207,7 +207,7 @@ def calculate_slope_vectorized(topo: rasterio.DatasetReader) -> Tuple[np.ndarray
     profile.update(dtype=slope.dtype, count=1, compress='lzw', height=slope.shape[0], width=slope.shape[1])
     with rasterio.open("temp_slope.tif", 'w', **profile) as dst:
         dst.write(slope, 1)
-    return slope, rasterio.open("temp_slope.tif")
+    return slope, rasterio.open("temp_slope.tif")'''
 
 def calculate_fault_distance(topo: rasterio.DatasetReader,
                            faults: gpd.GeoDataFrame) -> Tuple[np.ndarray, rasterio.DatasetReader]:
