@@ -44,7 +44,7 @@ class RasterData:
 
 
 
-def convert_to_rasterio(data, template):
+'''def convert_to_rasterio(data, template):
     """Convert numpy array to rasterio dataset."""
     profile = template.profile
     profile.update(dtype=data.dtype, count=1)
@@ -57,7 +57,16 @@ def convert_to_rasterio(data, template):
         data_as_rasterio = rasterio.open(temp_raster_path)
         return data_as_rasterio
 
-# ... your test function ...
+# ... your test function ...'''
+
+
+def convert_to_rasterio(data, template):
+    profile = template.profile
+    with tempfile.TemporaryDirectory() as tmpdir:
+        temp_raster_path = f"{tmpdir}/temp_raster.tif"
+        with rasterio.open(temp_raster_path, 'w', **profile) as dst:
+            dst.write(data, 1)
+    return rasterio.open(temp_raster_path)
 
 def extract_values_from_raster(raster, shape_object):
     """
