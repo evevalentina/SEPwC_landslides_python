@@ -45,6 +45,7 @@ class RasterData:
 
 
 def convert_to_rasterio(data, template):
+    """Convert numpy array to rasterio dataset."""
     profile = template.profile
     profile.update(dtype=data.dtype, count=1)
 
