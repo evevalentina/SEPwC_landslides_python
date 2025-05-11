@@ -214,8 +214,7 @@ def create_dataframe(topo, geo=None, lc=None, dist_fault=None,
             slope[i, j] = np.arctan(np.sqrt(dz_dx**2 + dz_dy**2)) * 180 / np.pi
     return slope, convert_to_rasterio(slope, topo)'''
 
-def calculate_slope(topo: rasterio.DatasetReader) -> Tuple
-[np.ndarray, rasterio.DatasetReader]:
+def calculate_slope_vecorized(topo: rasterio.DatasetReader) -> Tuple[np.ndarray, rasterio.DatasetReader]:
     """Calculate slope from topography using vectorized operations."""
     elevation = topo.read(1)
     resolution_x, resolution_y = topo.res
