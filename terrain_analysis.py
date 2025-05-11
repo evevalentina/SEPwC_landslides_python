@@ -28,7 +28,7 @@ class RasterData:
     slope: rasterio.DatasetReader
     fault_dist: rasterio.DatasetReader
 
-'''def convert_to_rasterio(raster_data, template_raster):
+def convert_to_rasterio(raster_data, template_raster):
     """Convert numpy array to rasterio dataset."""
     profile = template_raster.profile.copy()
     profile.update(
@@ -40,7 +40,7 @@ class RasterData:
     )
     with rasterio.open("temp_raster.tif", 'w', **profile) as dst:
         dst.write(raster_data, 1)
-    return rasterio.open("temp_raster.tif")'''
+    return rasterio.open("temp_raster.tif")
 
 
 
@@ -60,13 +60,13 @@ class RasterData:
 # ... your test function ...'''
 
 
-def convert_to_rasterio(data, template):
+'''def convert_to_rasterio(data, template):
     profile = template.profile
     with tempfile.TemporaryDirectory() as tmpdir:
         temp_raster_path = f"{tmpdir}/temp_raster.tif"
         with rasterio.open(temp_raster_path, 'w', **profile) as dst:
             dst.write(data, 1)
-    return rasterio.open(temp_raster_path)
+    return rasterio.open(temp_raster_path)'''
 
 def extract_values_from_raster(raster, shape_object):
     """
@@ -203,7 +203,7 @@ def create_dataframe(topo, geo=None, lc=None, dist_fault=None,
     gdf = gpd.GeoDataFrame(df)
     return gdf
 
-def calculate_slope(topo: rasterio.DatasetReader) -> Tuple[np.ndarray, rasterio.DatasetReader]:
+'''def calculate_slope(topo: rasterio.DatasetReader) -> Tuple[np.ndarray, rasterio.DatasetReader]:
     """Calculate slope from topography."""
     elevation = topo.read(1)
     slope = np.zeros_like(elevation)
@@ -212,7 +212,7 @@ def calculate_slope(topo: rasterio.DatasetReader) -> Tuple[np.ndarray, rasterio.
             dz_dx = (elevation[i, j+1] - elevation[i, j-1]) / (2 * topo.res[0])
             dz_dy = (elevation[i+1, j] - elevation[i-1, j]) / (2 * topo.res[1])
             slope[i, j] = np.arctan(np.sqrt(dz_dx**2 + dz_dy**2)) * 180 / np.pi
-    return slope, convert_to_rasterio(slope, topo)
+    return slope, convert_to_rasterio(slope, topo)'''
 
 '''def calculate_slope_vectorized(topo: rasterio.DatasetReader) -> Tuple
 [np.ndarray, rasterio.DatasetReader]:
@@ -250,7 +250,7 @@ def calculate_fault_distance(topo: rasterio.DatasetReader,
             point = shapely.geometry.Point(x, y)
             distances = [point.distance(fault) for fault in faults.geometry]
             fault_dist[i, j] = min(distances)
-    return fault_dist, convert_to_rasterio(fault_dist, topo)
+    return fault_dist, convert_to_rasterio(fault_dist, topo)'''
 
 def generate_non_landslide_points(topo: rasterio.DatasetReader,
                                 num_points: int) -> List[shapely.geometry.Point]:
