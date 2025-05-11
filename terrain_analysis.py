@@ -331,8 +331,8 @@ def main():
     landslides = gpd.read_file(args.landslides)
     if args.verbose:
         print("Calculating slope...")
-        '''temporerily changing calculate_slope to calculate_slope_vectorized'''
-        to see if it has a positive change/not
+        '''temporerily changing calculate_slope to calculate_slope_vectorized
+        to see if it has a positive change/not'''
     _, slope_raster = calculate_slope(topo)
     if args.verbose:
         print("Calculating distance from faults...")
