@@ -17,6 +17,7 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 import shapely.geometry
+import tempfile
 
 @dataclass
 class RasterData:
@@ -27,7 +28,7 @@ class RasterData:
     slope: rasterio.DatasetReader
     fault_dist: rasterio.DatasetReader
 
-def convert_to_rasterio(raster_data, template_raster):
+'''def convert_to_rasterio(raster_data, template_raster):
     """Convert numpy array to rasterio dataset."""
     profile = template_raster.profile.copy()
     profile.update(
@@ -39,7 +40,23 @@ def convert_to_rasterio(raster_data, template_raster):
     )
     with rasterio.open("temp_raster.tif", 'w', **profile) as dst:
         dst.write(raster_data, 1)
-    return rasterio.open("temp_raster.tif")
+    return rasterio.open("temp_raster.tif")'''
+
+
+
+def convert_to_rasterio(data, template):
+    profile = template.profile
+    profile.update(dtype=data.dtype, count=1)
+
+    with tempfile.NamedTemporaryFile(suffix=".tif", delete=True) as tmp_file:
+        temp_raster_path = tmp_file.name
+        with rasterio.open(temp_raster_path, 'w', **profile) as dst:
+            dst.write(data, 1)
+        # Now you can open the temporary raster file for further processing
+        data_as_rasterio = rasterio.open(temp_raster_path)
+        return data_as_rasterio
+
+# ... your test function ...
 
 def extract_values_from_raster(raster, shape_object):
     """
