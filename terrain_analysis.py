@@ -54,7 +54,6 @@ def convert_to_rasterio(raster_data, template_raster):
         # Now you can open the temporary raster file for further processing
         data_as_rasterio = rasterio.open(temp_raster_path)
         return data_as_rasterio
-
 # ... your test function ...'''
 
 
@@ -202,7 +201,6 @@ def create_dataframe(topo, geo=None, lc=None, dist_fault=None,
     return gdf
 
 '''def calculate_slope(topo: rasterio.DatasetReader) -> Tuple[np.ndarray, rasterio.DatasetReader]:
-    """Calculate slope from topography."""
     elevation = topo.read(1)
     slope = np.zeros_like(elevation)
     for i in range(1, elevation.shape[0]-1):
@@ -331,8 +329,6 @@ def main():
     landslides = gpd.read_file(args.landslides)
     if args.verbose:
         print("Calculating slope...")
-        '''temporerily changing calculate_slope to calculate_slope_vectorized
-        to see if it has a positive change/not'''
     _, slope_raster = calculate_slope(topo)
     if args.verbose:
         print("Calculating distance from faults...")
