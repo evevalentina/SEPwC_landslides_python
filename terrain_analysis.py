@@ -17,7 +17,6 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 import shapely.geometry
-import tempfile
 
 @dataclass
 class RasterData:
@@ -41,7 +40,6 @@ def convert_to_rasterio(raster_data, template_raster):
     with rasterio.open("temp_raster.tif", 'w', **profile) as dst:
         dst.write(raster_data, 1)
     return rasterio.open("temp_raster.tif")
-
 
 
 '''def convert_to_rasterio(data, template):
