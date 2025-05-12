@@ -231,7 +231,13 @@ def calculate_slope_vecorized(
     # For simplicity here, we'll just convert the calculated part to a raster.
     # A more robust implementation would handle the full output size.
     profile = topo.profile.copy()
-    profile.update(dtype=slope.dtype, count=1, compress='lzw', height=slope.shape[0], width=slope.shape[1])
+    profile.update(
+    dtype=slope.dtype,
+    count=1,
+    compress='lzw',
+    height=slope.shape[0],
+    width=slope.shape[1]
+)
     with rasterio.open("temp_slope.tif", 'w', **profile) as dst:
         dst.write(slope, 1)
     return slope, rasterio.open("temp_slope.tif")
