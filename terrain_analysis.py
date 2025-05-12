@@ -242,6 +242,7 @@ def calculate_slope_vecorized(
         dst.write(slope, 1)
     return slope, rasterio.open("temp_slope.tif")
 
+
 def calculate_fault_distance(topo: rasterio.DatasetReader,
                            faults: gpd.GeoDataFrame) -> Tuple[np.ndarray, rasterio.DatasetReader]:
     """Calculate distance from faults."""
