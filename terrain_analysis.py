@@ -43,7 +43,7 @@ def convert_to_rasterio(raster_data, template_raster):
 
 """
 def convert_to_rasterio(data, template):
-    """Convert numpy array to rasterio dataset."""
+    #Convert numpy array to rasterio dataset. - change this to docstring later
     profile = template.profile
     profile.update(dtype=data.dtype, count=1)
 
