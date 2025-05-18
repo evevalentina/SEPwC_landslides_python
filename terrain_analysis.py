@@ -41,32 +41,6 @@ def convert_to_rasterio(raster_data, template_raster):
         dst.write(raster_data, 1)
     return rasterio.open("temp_raster.tif")
 
-"""
-def convert_to_rasterio(data, template):
-    #Convert numpy array to rasterio dataset. - change this to docstring later
-    profile = template.profile
-    profile.update(dtype=data.dtype, count=1)
-
-    with tempfile.NamedTemporaryFile(suffix=".tif", delete=True) as tmp_file:
-        temp_raster_path = tmp_file.name
-        with rasterio.open(temp_raster_path, 'w', **profile) as dst:
-            dst.write(data, 1)
-        # Now you can open the temporary raster file for further processing
-        data_as_rasterio = rasterio.open(temp_raster_path)
-        return data_as_rasterio
-# ... your test function ... 
-"""
-
-
-"""
- def convert_to_rasterio(data, template):
-    profile = template.profile
-    with tempfile.TemporaryDirectory() as tmpdir:
-        temp_raster_path = f"{tmpdir}/temp_raster.tif"
-        with rasterio.open(temp_raster_path, 'w', **profile) as dst:
-            dst.write(data, 1)
-    return rasterio.open(temp_raster_path)
-"""
 
 def extract_values_from_raster(raster, shape_object):
     """
@@ -158,19 +132,8 @@ def make_prob_raster_data(raster_data: RasterData, classifier):
 
 def create_dataframe(topo, geo=None, lc=None, dist_fault=None,
                      slope=None, shape=None, landslides=None):
-    """
-    Create a GeoDataFrame with features for the classifier.
-    Args:
-        topo: Either a RasterData object or a topography raster
-        geo: Geology raster (optional if topo is RasterData)
-        lc: Landcover raster (optional if topo is RasterData)
-        dist_fault: Distance from faults raster (optional if topo is RasterData)
-        slope: Slope raster (optional if topo is RasterData)
-        shape: List of geometry objects (required)
-        landslides: Whether these are landslide locations (1) or not (0) (required)
-    Returns:
-        GeoDataFrame with features and target variable
-    """
+
+    
     if isinstance(topo, RasterData):
         raster_data = topo
         shape = geo  # In this case, geo is actually the shape parameter
@@ -203,18 +166,6 @@ def create_dataframe(topo, geo=None, lc=None, dist_fault=None,
     gdf = gpd.GeoDataFrame(df)
     return gdf
 
-
-"""
-def calculate_slope(topo: rasterio.DatasetReader) -> Tuple[np.ndarray, rasterio.DatasetReader]:
-    elevation = topo.read(1)
-    slope = np.zeros_like(elevation)
-    for i in range(1, elevation.shape[0]-1):
-        for j in range(1, elevation.shape[1]-1):
-            dz_dx = (elevation[i, j+1] - elevation[i, j-1]) / (2 * topo.res[0])
-            dz_dy = (elevation[i+1, j] - elevation[i-1, j]) / (2 * topo.res[1])
-            slope[i, j] = np.arctan(np.sqrt(dz_dx**2 + dz_dy**2)) * 180 / np.pi
-    return slope, convert_to_rasterio(slope, topo)
-"""
 
 def calculate_slope_vecorized(
     topo: rasterio.DatasetReader
