@@ -347,7 +347,7 @@ def main():
     landslides = gpd.read_file(args.landslides)
     if args.verbose:
         print("Calculating slope...")
-    _, slope_raster = calculate_slope(topo)
+    slope_raster = calculate_slope(topo)
     if args.verbose:
         print("Calculating distance from faults...")
     _, fault_dist_raster = calculate_fault_distance(topo, faults)
