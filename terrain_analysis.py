@@ -1,7 +1,7 @@
 """
 IMPORTANT- please can this exam be ran in a MAC OR LINEUX opperating system as
 the processing is at times inconsistant in windows
-This module implements landslide risk analysis using rasterio.
+This module implements landslide risk analysis using machine learning .
 It takes various geographic data inputs and produces a probability map
 of landslide occurrence.
 """
@@ -328,6 +328,11 @@ def prepare_training_data(raster_data: RasterData, landslides: gpd.GeoDataFrame)
     non_landslide_df = create_dataframe(raster_data, non_landslide_points, 0)
     # Combine dataframes
     return pd.concat([landslide_df, non_landslide_df])
+
+
+def calculate_slope(elevation_data):
+    # Dummy slope calculation
+    return np.zeros_like(elevation_data, dtype=float)
 
 def main():
     """Main function to run the landslide risk analysis."""
