@@ -186,8 +186,9 @@ def calculate_slope_vecorized(
     # Use array slicing for finite differences
     dz_dx = (elevation[:, 2:] - elevation[:, :-2]) / (2 * resolution_x)
     dz_dy = (elevation[2:, :] - elevation[:-2, :]) / (2 * resolution_y)
-"""Calculates the slope (in degrees) from a digital elevation model (DEM) using
-   vectorized finite difference methods.
+    """Calculates the slope (in degrees) from a digital elevation model (DEM) 
+    using
+    vectorized finite difference methods.
 
     This function takes an opened rasterio dataset of a DEM, reads its elevation
     band,and then calculates the rate of change in elevation in the x
