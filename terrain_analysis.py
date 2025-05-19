@@ -142,8 +142,8 @@ def create_dataframe(topo, geo=None, lc=None, dist_fault=None,
 
     Combines 1D array-like geospatial datasets into a DataFrame.
     Columns are named after the input arguments."""
-   
-    
+
+
     if isinstance(topo, RasterData):
         raster_data = topo
         shape = geo  # In this case, geo is actually the shape parameter
@@ -187,8 +187,7 @@ def calculate_slope_vecorized(
     dz_dx = (elevation[:, 2:] - elevation[:, :-2]) / (2 * resolution_x)
     dz_dy = (elevation[2:, :] - elevation[:-2, :]) / (2 * resolution_y)
     """Calculates the slope (in degrees) from a digital elevation model (DEM) 
-    using
-    vectorized finite difference methods.
+    using vectorized finite difference methods.
 
     This function takes an opened rasterio dataset of a DEM, reads its elevation
     band,and then calculates the rate of change in elevation in the x
@@ -196,6 +195,7 @@ def calculate_slope_vecorized(
     computation. These gradients are then implicitly used to determine the
     slope, although the explicit slope calculation
     (e.g., using arctangent) is not performed within this function."""
+
     # Handle boundary conditions (e.g., by padding or using a different approach)
     # This is a simplified example and might need adjustments based on desired boundary behavior
 
@@ -298,9 +298,9 @@ def prepare_training_data(raster_data: RasterData, landslides: gpd.GeoDataFrame)
     return pd.concat([landslide_df, non_landslide_df])
 
 
-def calculate_slope(elevation_data):
+"""def calculate_slope(elevation_data):
     # Dummy slope calculation
-    return np.zeros_like(elevation_data, dtype=float)
+    return np.zeros_like(elevation_data, dtype=float)"""
 
 def main():
     """Main function to run the landslide risk analysis."""
@@ -348,4 +348,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
