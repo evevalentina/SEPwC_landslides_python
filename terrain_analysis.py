@@ -186,7 +186,7 @@ def calculate_slope_vecorized(
     # Use array slicing for finite differences
     dz_dx = (elevation[:, 2:] - elevation[:, :-2]) / (2 * resolution_x)
     dz_dy = (elevation[2:, :] - elevation[:-2, :]) / (2 * resolution_y)
-    
+
     # Handle boundary conditions (e.g., by padding or using a different approach)
     # This is a simplified example and might need adjustments based on desired boundary behavior
 
@@ -276,6 +276,7 @@ def parse_arguments():
     return parser.parse_args()
 
 def prepare_training_data(raster_data: RasterData, landslides: gpd.GeoDataFrame):
+    """preparing landslides susceptibility model"""
     #Prepare training data for the classifier.
     landslide_points = list(landslides.geometry)
     non_landslide_points = generate_non_landslide_points(
