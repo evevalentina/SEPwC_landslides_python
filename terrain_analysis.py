@@ -130,10 +130,15 @@ def make_prob_raster_data(raster_data: RasterData, classifier):
 
 # pylint: disable=too-many-arguments, too-many-positional-arguments
 
+def calculate_slope(elevation_data):
+    """Calculates the slope from elevation data."""
+    # ... your code ...
+    return np.zeros_like(elevation_data, dtype=float)
+
 def create_dataframe(topo, geo=None, lc=None, dist_fault=None,
                      slope=None, shape=None, landslides=None):
 
-    
+
     if isinstance(topo, RasterData):
         raster_data = topo
         shape = geo  # In this case, geo is actually the shape parameter
@@ -183,8 +188,7 @@ def calculate_slope_vecorized(
 
     slope = np.arctan(np.sqrt(dz_dx**2 + dz_dy**2)) * 180 / np.pi
 
-    # The shape of 'slope' will be smaller than 'elevation'. You'll need to
-    # decide how to handle the boundaries (e.g., pad with zeros or crop).
+    # The shape of 'slope' will be smaller than 'elevation'. 
     # For simplicity here, we'll just convert the calculated part to a raster.
     # A more robust implementation would handle the full output size.
     profile = topo.profile.copy()
@@ -274,10 +278,10 @@ def prepare_training_data(raster_data: RasterData, landslides: gpd.GeoDataFrame)
         raster_data.topo,
         len(landslide_points)
     )
-    # Create dataframes for both classes
+    ''' Create dataframes for both classes'''
     landslide_df = create_dataframe(raster_data, landslide_points, 1)
     non_landslide_df = create_dataframe(raster_data, non_landslide_points, 0)
-    # Combine dataframes
+    '''Combine dataframes'''
     return pd.concat([landslide_df, non_landslide_df])
 
 
