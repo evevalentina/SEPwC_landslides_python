@@ -135,9 +135,13 @@ def calculate_slope(elevation_data):
     # ... your code ...
     return np.zeros_like(elevation_data, dtype=float)
 
+
 def create_dataframe(topo, geo=None, lc=None, dist_fault=None,
                      slope=None, shape=None, landslides=None):
+ """Creates a Pandas DataFrame from geospatial data.
 
+    Combines 1D array-like geospatial datasets into a DataFrame.
+    Columns are named after the input arguments."""
 
     if isinstance(topo, RasterData):
         raster_data = topo
@@ -178,17 +182,24 @@ def calculate_slope_vecorized(
     """Calculate slope from topography using vectorized operations."""
     elevation = topo.read(1)
     resolution_x, resolution_y = topo.res
-
     # Use array slicing for finite differences
     dz_dx = (elevation[:, 2:] - elevation[:, :-2]) / (2 * resolution_x)
     dz_dy = (elevation[2:, :] - elevation[:-2, :]) / (2 * resolution_y)
+"""Calculates the slope (in degrees) from a digital elevation model (DEM) using
+   vectorized finite difference methods.
 
+    This function takes an opened rasterio dataset of a DEM, reads its elevation
+    band,and then calculates the rate of change in elevation in the x
+    (dz_dx) and y (dz_dy) directions using array slicing for efficient
+    computation. These gradients are then implicitly used to determine the
+    slope, although the explicit slope calculation
+    (e.g., using arctangent) is not performed within this function."""
     # Handle boundary conditions (e.g., by padding or using a different approach)
     # This is a simplified example and might need adjustments based on desired boundary behavior
 
     slope = np.arctan(np.sqrt(dz_dx**2 + dz_dy**2)) * 180 / np.pi
 
-    # The shape of 'slope' will be smaller than 'elevation'. 
+    # The shape of 'slope' will be smaller than 'elevation'.
     # For simplicity here, we'll just convert the calculated part to a raster.
     # A more robust implementation would handle the full output size.
     profile = topo.profile.copy()
