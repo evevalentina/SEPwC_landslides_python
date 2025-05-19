@@ -285,22 +285,18 @@ def parse_arguments():
     return parser.parse_args()
 
 def prepare_training_data(raster_data: RasterData, landslides: gpd.GeoDataFrame):
-    """Prepare training data for the classifier."""
+    #Prepare training data for the classifier.
     landslide_points = list(landslides.geometry)
     non_landslide_points = generate_non_landslide_points(
         raster_data.topo,
         len(landslide_points)
     )
-    ''' Create dataframes for both classes'''
+    #Create dataframes for both classes
     landslide_df = create_dataframe(raster_data, landslide_points, 1)
     non_landslide_df = create_dataframe(raster_data, non_landslide_points, 0)
-    '''Combine dataframes'''
+    #Combine dataframes
     return pd.concat([landslide_df, non_landslide_df])
 
-
-"""def calculate_slope(elevation_data):
-    # Dummy slope calculation
-    return np.zeros_like(elevation_data, dtype=float)"""
 
 def main():
     """Main function to run the landslide risk analysis."""
