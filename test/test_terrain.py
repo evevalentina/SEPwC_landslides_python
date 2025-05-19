@@ -116,7 +116,7 @@ class TestRegression():
                                 "data/Confirmed_faults.shp",
                                 "data/landslides.shp",
                                 "test.tif"], capture_output=True, check=True)
-      #  assert len(result.stdout) < 25
+        assert len(result.stdout) < 25
 
         raster = rasterio.open("test.tif")
         values = raster.read(1)
@@ -143,7 +143,7 @@ class TestRegression():
                                 "data/landslides.shp",
                                 "--v",
                                 "test.tif"], capture_output=True, check=True)
-      #  assert len(result.stdout) > 25
+        assert len(result.stdout) > 25
 
         raster = rasterio.open("test.tif")
         values = raster.read(1)
