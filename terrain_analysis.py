@@ -138,11 +138,12 @@ def calculate_slope(elevation_data):
 
 def create_dataframe(topo, geo=None, lc=None, dist_fault=None,
                      slope=None, shape=None, landslides=None):
- """Creates a Pandas DataFrame from geospatial data.
+    """Creates a Pandas DataFrame from geospatial data.
 
     Combines 1D array-like geospatial datasets into a DataFrame.
     Columns are named after the input arguments."""
-
+   
+    
     if isinstance(topo, RasterData):
         raster_data = topo
         shape = geo  # In this case, geo is actually the shape parameter
