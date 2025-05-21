@@ -37,10 +37,8 @@ def convert_to_rasterio(raster_data, template_raster):
         count=1,
         compress='lzw'
     )
-    import rasterio
-    with rasterio.open("data/AW3D30.tif") as src:
-       elevation_array = src.read(1)
-       slope_result = calculate_slope_vecorized(elevation_array)
+    with rasterio.open("temp_raster.tif", 'w', **profile) as dst:
+        dst.write(raster_data, 1)
     return rasterio.open("temp_raster.tif")
 
 
@@ -205,9 +203,8 @@ def calculate_slope_vecorized(
     height=slope.shape[0],
     width=slope.shape[1]
 )
-    with rasterio.open("data/AW3D30.tif") as src:
-       elevation_array = src.read(1)
-       slope_result = calculate_slope_vecorized(elevation_array)
+    with rasterio.open("temp_raster.tif", 'w', **profile) as dst:
+        dst.write(slope, 1)
     return slope, rasterio.open("temp_slope.tif")
 
 
@@ -246,8 +243,8 @@ def save_probability_map(prob_map: np.ndarray,
         count=1,
         compress='lzw'
     )
-    with rasterio.open(output_path, 'w', **profile) as src:
-        src.write(prob_map.astype('float32'), 1)
+    with rasterio.open(output_path, 'w', **profile) as dst:
+        dst.write(prob_map.astype('float32'), 1)
 
 def parse_arguments():
     """Parse command line arguments."""
