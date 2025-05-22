@@ -334,7 +334,7 @@ def main():
     save_probability_map(prob_map, topo, args.output)
     if args.verbose:
         print("Done!")
-    
+ 
 def plot_probability_histogram(prob_map: np.ndarray) -> None:
     """Generates a histogram of predicted landslide probabilities."""
     plt.figure(figsize=(8, 5))
@@ -344,6 +344,6 @@ def plot_probability_histogram(prob_map: np.ndarray) -> None:
     plt.ylabel("Number of Pixels")
     plt.grid(axis='y', alpha=0.75)
     plt.show()
-        
+       
 if __name__ == '__main__':
     main()
