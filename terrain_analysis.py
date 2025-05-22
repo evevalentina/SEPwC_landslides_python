@@ -10,6 +10,7 @@ from dataclasses import dataclass
 from typing import List, Tuple
 import argparse
 
+import matplotlib.pyplot as plt
 import numpy as np
 import rasterio
 import geopandas as gpd
@@ -333,6 +334,16 @@ def main():
     save_probability_map(prob_map, topo, args.output)
     if args.verbose:
         print("Done!")
-
+    
+def plot_probability_histogram(prob_map: np.ndarray) -> None:
+    """Generates a histogram of predicted landslide probabilities."""
+    plt.figure(figsize=(8, 5))
+    plt.hist(prob_map.flatten(), bins=50, color='skyblue', edgecolor='black')
+    plt.title("Distribution of Landslide Probabilities")
+    plt.xlabel("Probability")
+    plt.ylabel("Number of Pixels")
+    plt.grid(axis='y', alpha=0.75)
+    plt.show()
+        
 if __name__ == '__main__':
     main()
